@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Amantiz VPN</title>
+    
+    <!-- Telegram Web App script -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="user-profile">
+                <div class="avatar-glow"></div>
+                <img id="user-avatar" src="https://via.placeholder.com/150" alt="Avatar">
+                <div class="user-info">
+                    <h1 id="user-name">Загрузка...</h1>
+                    <p class="status">Premium User</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="tab-btn active" data-target="keys-section">Мои ключи</button>
+            <button class="tab-btn" data-target="create-section">Новый VPN</button>
+            <button class="tab-btn" data-target="proxy-section">TG Proxy</button>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            
+            <!-- SECTION: Keys -->
+            <section id="keys-section" class="section active">
+                <div class="section-header">
+                    <h2>Управление доступом</h2>
+                    <span class="badge" id="keys-count">0 / 5</span>
+                </div>
+                
+                <div class="keys-list" id="keys-container">
+                    <!-- Cards will be injected here via JS -->
+                </div>
+            </section>
+
+            <!-- SECTION: Create New -->
+            <section id="create-section" class="section">
+                <div class="glass-card form-card">
+                    <h2>Создать новый VPN</h2>
+                    <p class="subtitle">Выберите протокол и введите имя устройства</p>
+                    
+                    <div class="protocol-selector">
+                        <input type="radio" id="proto-vless" name="protocol" value="vless" checked>
+                        <label for="proto-vless" class="proto-btn">
+                            <span class="icon">🍏</span>
+                            <span class="text">VLESS</span>
+                        </label>
+                        
+                        <input type="radio" id="proto-hysteria" name="protocol" value="hysteria">
+                        <label for="proto-hysteria" class="proto-btn">
+                            <span class="icon">🚀</span>
+                            <span class="text">Hysteria 2</span>
+                        </label>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="device-name">Имя устройства (на английском)</label>
+                        <input type="text" id="device-name" placeholder="Например: iPhone, PC, TV" autocomplete="off">
+                    </div>
+
+                    <button class="primary-btn" id="btn-create">Сгенерировать ключ</button>
+                </div>
+            </section>
+
+            <!-- SECTION: TG Proxy -->
+            <section id="proxy-section" class="section">
+                <div class="glass-card proxy-card">
+                    <div class="proxy-icon">✈️</div>
+                    <h2>Telegram Proxy</h2>
+                    <p class="subtitle">Антиблокировка для Telegram. Работает быстро, без рекламы и без включения основного VPN.</p>
+                    
+                    <button class="primary-btn mt-4" id="btn-proxy">Подключить Proxy</button>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Modal (QR Code) -->
+        <div class="modal-overlay" id="qr-modal">
+            <div class="glass-card modal-content">
+                <button class="close-btn" id="close-modal">×</button>
+                <h2>Сканируй QR</h2>
+                <div class="qr-container" id="qr-code-box">
+                    <!-- QR code image -->
+                </div>
+                <p class="key-name" id="modal-key-name">VPN Key</p>
+                <button class="secondary-btn w-100" id="btn-copy-link">Скопировать ссылку</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- qrcode.js library for frontend QR generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
