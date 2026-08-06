@@ -17,6 +17,49 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Guest App (Shown outside Telegram) -->
+    <div id="guest-app" style="display: none; padding: 20px;">
+        <div class="glass-card form-card" style="margin: 20px auto; max-width: 400px; text-align: center;">
+            <div class="avatar-glow" style="margin: 0 auto 20px; position: relative;"></div>
+            <h2>Секретный Доступ</h2>
+            <p class="subtitle" style="margin-bottom: 20px;">Введите имя и пароль для получения VPN-ключа без Telegram.</p>
+            
+            <div class="input-group" style="text-align: left;">
+                <label>Ваше имя</label>
+                <input type="text" id="guest-name" placeholder="Например: Misha" autocomplete="off">
+            </div>
+            
+            <div class="input-group" style="text-align: left; margin-top: 15px;">
+                <label>Секретный код</label>
+                <input type="password" id="guest-password" placeholder="Секретный пароль">
+            </div>
+            
+            <div class="protocol-selector" style="margin-top: 20px;">
+                <input type="radio" id="guest-vless" name="guest-protocol" value="vless" checked>
+                <label for="guest-vless" class="proto-btn">
+                    <span class="icon">🍏</span>
+                    <span class="text">VLESS</span>
+                </label>
+                
+                <input type="radio" id="guest-hysteria" name="guest-protocol" value="hysteria">
+                <label for="guest-hysteria" class="proto-btn">
+                    <span class="icon">🚀</span>
+                    <span class="text">Hysteria 2</span>
+                </label>
+            </div>
+
+            <button class="primary-btn mt-4" id="btn-guest-create">Получить VPN</button>
+            
+            <div id="guest-result" style="display: none; margin-top: 20px;">
+                <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
+                <h3 style="color: var(--success); margin-bottom: 10px;">✅ Ваш ключ готов!</h3>
+                <div class="qr-container" id="guest-qr-box" style="margin: 0 auto 15px; width: 200px; height: 200px;"></div>
+                <button class="secondary-btn w-100" id="btn-guest-copy">Скопировать ссылку</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Telegram App (Shown inside Telegram) -->
     <div id="app">
         <!-- Header -->
         <header class="header">
