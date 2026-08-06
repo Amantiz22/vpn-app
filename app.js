@@ -22,7 +22,10 @@ try {
 }
 
 if (!tg || !tg.initDataUnsafe || !tg.initDataUnsafe.user) {
-    document.getElementById('user-name').textContent = 'Amantiz (Test)';
+    document.getElementById('user-name').textContent = 'Гость';
+    // Hide Telegram App and Show Guest App
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('guest-app').style.display = 'block';
 }
 
 const tabBtns = document.querySelectorAll('.tab-btn');
@@ -274,7 +277,79 @@ document.getElementById('btn-proxy').addEventListener('click', () => {
 // Initial load
 if (initData) {
     fetchKeys();
-} else {
-    // Demo fallback for browser
-    renderKeys();
+}
+
+// ==========================================
+// Guest Mode Logic
+// ==========================================
+const guestCreateBtn = document.getElementById('btn-guest-create');
+const guestCopyBtn = document.getElementById('btn-guest-copy');
+let guestLink = '';
+
+if (guestCreateBtn) {
+    guestCreateBtn.addEventListener('click', async () => {
+        const name = document.getElementById('guest-name').value.trim();
+        const password = document.getElementById('guest-password').value.trim();
+        const protocol = document.querySelector('input[name="guest-protocol"]:checked').value;
+        
+        if (!name || !password) {
+            alert('Пожалуйста, введите имя и секретный код!');
+            return;
+        }
+        
+        const originalText = guestCreateBtn.textContent;
+        guestCreateBtn.textContent = 'Генерация... ⏳';
+        guestCreateBtn.style.opacity = '0.7';
+        guestCreateBtn.style.pointerEvents = 'none';
+        
+        try {
+            const res = await fetch(`${API_URL}/guest_key`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, password, protocol })
+            });
+            const data = await res.json();
+            
+            if (res.ok && data.success) {
+                guestLink = data.link;
+                document.getElementById('guest-result').style.display = 'block';
+                
+                const qrBox = document.getElementById('guest-qr-box');
+                qrBox.innerHTML = '';
+                new QRCode(qrBox, {
+                    text: guestLink,
+                    width: 200, height: 200,
+                    colorDark : "#000000", colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.M
+                });
+                guestCreateBtn.style.display = 'none';
+                document.getElementById('guest-name').disabled = true;
+                document.getElementById('guest-password').disabled = true;
+            } else {
+                alert('Ошибка: ' + (data.error || 'Неизвестная ошибка'));
+            }
+        } catch(err) {
+            console.error(err);
+            alert('Ошибка соединения с сервером');
+        } finally {
+            guestCreateBtn.textContent = originalText;
+            guestCreateBtn.style.opacity = '1';
+            guestCreateBtn.style.pointerEvents = 'auto';
+        }
+    });
+}
+
+if (guestCopyBtn) {
+    guestCopyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(guestLink).then(() => {
+            guestCopyBtn.textContent = '✅ Скопировано!';
+            guestCopyBtn.style.background = 'var(--success)';
+            guestCopyBtn.style.color = '#000';
+            setTimeout(() => {
+                guestCopyBtn.textContent = 'Скопировать ссылку';
+                guestCopyBtn.style.background = '';
+                guestCopyBtn.style.color = '';
+            }, 2000);
+        });
+    });
 }
