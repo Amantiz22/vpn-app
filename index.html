@@ -31,24 +31,10 @@
             
             <div class="input-group" style="text-align: left; margin-top: 15px;">
                 <label>Секретный код</label>
-                <input type="password" id="guest-password" placeholder="Секретный пароль">
-            </div>
-            
-            <div class="protocol-selector" style="margin-top: 20px;">
-                <input type="radio" id="guest-vless" name="guest-protocol" value="vless" checked>
-                <label for="guest-vless" class="proto-btn">
-                    <span class="icon">🍏</span>
-                    <span class="text">VLESS</span>
-                </label>
-                
-                <input type="radio" id="guest-hysteria" name="guest-protocol" value="hysteria">
-                <label for="guest-hysteria" class="proto-btn">
-                    <span class="icon">🚀</span>
-                    <span class="text">Hysteria 2</span>
-                </label>
+                <input type="password" id="guest-password" placeholder="Пароль доступа">
             </div>
 
-            <button class="primary-btn mt-4" id="btn-guest-create">Получить VPN</button>
+            <button class="primary-btn mt-4" id="btn-guest-create">Сгенерировать Подписку</button>
             
             <div id="guest-result" style="display: none; margin-top: 20px;">
                 <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
@@ -98,29 +84,15 @@
             <!-- SECTION: Create New -->
             <section id="create-section" class="section">
                 <div class="glass-card form-card">
-                    <h2>Создать новый VPN</h2>
-                    <p class="subtitle">Выберите протокол и введите имя устройства</p>
-                    
-                    <div class="protocol-selector">
-                        <input type="radio" id="proto-vless" name="protocol" value="vless" checked>
-                        <label for="proto-vless" class="proto-btn">
-                            <span class="icon">🍏</span>
-                            <span class="text">VLESS</span>
-                        </label>
-                        
-                        <input type="radio" id="proto-hysteria" name="protocol" value="hysteria">
-                        <label for="proto-hysteria" class="proto-btn">
-                            <span class="icon">🚀</span>
-                            <span class="text">Hysteria 2</span>
-                        </label>
-                    </div>
+                    <h2>Создать Подписку</h2>
+                    <p class="subtitle">Введите имя устройства</p>
 
                     <div class="input-group">
                         <label for="device-name">Имя устройства (на английском)</label>
                         <input type="text" id="device-name" placeholder="Например: iPhone, PC, TV" autocomplete="off">
                     </div>
 
-                    <button class="primary-btn" id="btn-create">Сгенерировать ключ</button>
+                    <button class="primary-btn" id="btn-create">Сгенерировать подписку</button>
                 </div>
             </section>
 

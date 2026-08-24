@@ -231,11 +231,9 @@ document.getElementById('btn-create').addEventListener('click', async () => {
         return;
     }
 
-    const proto = document.querySelector('input[name="protocol"]:checked').value;
-    
     const btn = document.getElementById('btn-create');
     const originalText = btn.textContent;
-    btn.textContent = 'Создаем ключ... ⏳';
+    btn.textContent = 'Генерация... ⏳';
     btn.style.opacity = '0.7';
     btn.style.pointerEvents = 'none';
 
@@ -243,7 +241,7 @@ document.getElementById('btn-create').addEventListener('click', async () => {
         const res = await fetch(`${API_URL}/keys`, {
             method: 'POST',
             headers: { 'Authorization': initData, 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name: name, protocol: proto })
+            body: JSON.stringify({ name: name })
         });
         
         if (res.ok) {
@@ -290,7 +288,6 @@ if (guestCreateBtn) {
     guestCreateBtn.addEventListener('click', async () => {
         const name = document.getElementById('guest-name').value.trim();
         const password = document.getElementById('guest-password').value.trim();
-        const protocol = document.querySelector('input[name="guest-protocol"]:checked').value;
         
         if (!name || !password) {
             alert('Пожалуйста, введите имя и секретный код!');
@@ -306,7 +303,7 @@ if (guestCreateBtn) {
             const res = await fetch(`${API_URL}/guest_key`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, password, protocol })
+                body: JSON.stringify({ name, password })
             });
             const data = await res.json();
             
