@@ -47,7 +47,7 @@ tabBtns.forEach(btn => {
 // ==========================================
 // API Logic
 // ==========================================
-const API_URL = "https://amantiz.duckdns.org:8443/api";
+const API_URL = "https://cdn.amantizz.ru:8444/api";
 let initData = tg ? tg.initData : "";
 const MAX_KEYS = 5;
 let myKeys = [];
