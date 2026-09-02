@@ -62,9 +62,13 @@ async function fetchKeys() {
             renderKeys();
         } else {
             console.error("Failed to load keys");
+            document.getElementById('keys-container').innerHTML =
+                '<p style="opacity:0.7">⚠️ Не удалось загрузить ключи (сервер панели временно недоступен). Попробуйте обновить через минуту — сами ключи никуда не делись.</p>';
         }
     } catch (e) {
         console.error("API connection error", e);
+        document.getElementById('keys-container').innerHTML =
+            '<p style="opacity:0.7">⚠️ Нет связи с сервером. Попробуйте обновить через минуту — сами ключи никуда не делись.</p>';
     }
 }
 
