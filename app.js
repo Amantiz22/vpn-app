@@ -22,8 +22,7 @@ try {
 }
 
 if (!tg || !tg.initDataUnsafe || !tg.initDataUnsafe.user) {
-    document.getElementById('user-name').textContent = 'Гость';
-    // Hide Telegram App and Show Guest App
+    // Hide Telegram App and show the web-access form
     document.getElementById('app').style.display = 'none';
     document.getElementById('guest-app').style.display = 'block';
 }
